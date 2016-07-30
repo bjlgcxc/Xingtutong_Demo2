@@ -24,7 +24,7 @@ public class SpecialController {
 	BraceletService braceletService;
 	
 	/*
-	 * 保存手环状态信息、健康信息
+	 * 保存手环状态信息
 	 */
 	@RequestMapping(value="app/special/{deviceId}/saveJsonArray",method = RequestMethod.POST)
 	public String specialJson(@RequestBody JSONObject[] jsonArray,@PathVariable int deviceId){
