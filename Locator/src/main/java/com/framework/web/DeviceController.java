@@ -1,22 +1,14 @@
 package com.framework.web;
 
 import java.sql.Timestamp;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.framework.domain.BraceletInfo;
 import com.framework.domain.DeviceInfo;
-import com.framework.service.BraceletService;
 import com.framework.service.DeviceService;
 import com.framework.service.InstructionService;
 
@@ -27,8 +19,6 @@ public class DeviceController {
 	
 	@Autowired
 	DeviceService deviceService;
-	@Autowired
-	BraceletService braceletService;
 	@Autowired
 	InstructionService instructionService;
 
@@ -64,35 +54,7 @@ public class DeviceController {
 		return deviceInfo;
 	}
 	
-	
-	/*
-	 * 手机连接蓝牙,app发送手环信息到后台
-	 */
-	@RequestMapping(value="/app/device/{deviceId}/bluetoothConn",method = RequestMethod.POST)
-	public String bluetoothConn(@RequestBody JSONObject jsonObj,@PathVariable int deviceId){
-		
-		//更新设备(手环)的mac地址
-		String mac = jsonObj.getString("mac");
-		DeviceInfo deviceInfo = new DeviceInfo();
-		deviceInfo.setId(deviceId);
-		deviceInfo.setMac(mac);
-		deviceInfo.setConnectTime(new Timestamp(System.currentTimeMillis()));
-		deviceService.updateDevicetInfo(deviceInfo);
-		
-		//添加手环的信息
-		BraceletInfo braceletInfo = (BraceletInfo)JSONObject.toBean(jsonObj,BraceletInfo.class);
-		boolean isBraceletExist = braceletService.hasMatchBracelet(mac);
-		if(!isBraceletExist)
-			braceletService.addBraceletInfo(braceletInfo);
-		else{
-			braceletService.updateBraceletInfo(braceletInfo);
-		}
-		
-		log.info("get bracelet info");
-		return "redirect:/app/instruction/" + deviceId + "/returnJsonArray";
-	}
-	
-	
+
 	/*
 	 * app与后台通信时,更新通信时间
 	 */
@@ -104,50 +66,4 @@ public class DeviceController {
 		deviceService.updateConnectTime(deviceInfo);
 	}
 	
-	
-	/*
-	 * 获取设备信息列表
-	 */
-	@RequestMapping(value="device.html")
-	public String getDeviceInfo(HttpServletRequest request){
-		String deviceId = request.getParameter("deviceId");
-		String deviceName = (String) request.getParameter("deviceName");
-		String deviceAlias = request.getParameter("deviceAlias");
-		
-		JSONArray jsonArray = new JSONArray();
-		if(deviceId!=null && deviceId!=""){
-			List<DeviceInfo> deviceInfo = deviceService.getDeviceInfo(deviceId,null, null);
-			if(deviceInfo!=null){
-				List<BraceletInfo> braceletInfoList = braceletService.getBraceletInfo(deviceInfo.get(0).getMac(),deviceName, deviceAlias); 
-				if(braceletInfoList!=null){			
-					JSONObject jsonObj = new JSONObject();
-					jsonObj.put("id", deviceId);
-					jsonObj.put("name",braceletInfoList.get(0).getName());
-					jsonObj.put("alias",braceletInfoList.get(0).getAlias());
-					jsonObj.put("connectTime",deviceInfo.get(0).getConnectTime().getTime());
-					jsonArray.add(jsonObj);
-				}
-			}
-		}
-		else{
-			List<BraceletInfo> braceletInfoList = braceletService.getBraceletInfo(null,deviceName, deviceAlias); 
-			if(braceletInfoList!=null){
-				for(BraceletInfo braceletInfo:braceletInfoList){
-					JSONObject jsonObj = new JSONObject();
-					String mac = braceletInfo.getMac();
-					List<DeviceInfo> deviceInfoList = deviceService.getDeviceInfo(null,null,mac);
-					if(deviceInfoList!=null){
-						jsonObj.put("id",deviceInfoList.get(0).getId());
-						jsonObj.put("name",braceletInfo.getName());
-						jsonObj.put("alias", braceletInfo.getAlias());
-						jsonObj.put("connectTime",deviceInfoList.get(0).getConnectTime().getTime());
-						jsonArray.add(jsonObj);
-				    }
-				}
-			}
-		}
-		
-		request.setAttribute("deviceInfo", jsonArray);
-		return "device";
-	}
 }
