@@ -4,11 +4,11 @@
     String context = request.getContextPath();
     request.setAttribute("context",context);
     
-    String verifyCode = (String)request.getAttribute("verifyCode");    
+    String verifyCode = (String)session.getAttribute("verifyCode");    
 %>
 <html>
 <head>
-    <title>管理员登录</title>
+    <title>用户注册</title>
     
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,33 +34,28 @@
                 $("#submit").click();
             }
         });
-		
+        	
 		$("#submit").click(function(){
 			if($("#userName").val()=='' || $("#password").val()==''){
-				layer.msg('请输入账号和密码');
+				layer.msg('请填写注册账号/注册密码');
 			}
-			else if($("#verifyCode").val()==<%=verifyCode%>){
-				$.ajax({
-					url:"user/loginCheck",
+			else{
+			    $.ajax({
+					url:"user/register",
 					type:"get",			
 					dataType:"json",
 					data:{userName:$("#userName").val(),password:$("#password").val()},
 					success:function(data){
-						if(data.info=="error"){
-							layer.alert('账号或密码错误');
+						if(data.info!="error"){
+							layer.msg('注册成功!');						
+							setTimeout(function(){location.href="login.html";},2000);
 						}
 						else{
-							<%session.setAttribute("loginStatus", "login");%>
-							location.href = "index.html";
+							layer.msg('注册的账号已存在，请重新选择!');
+							setTimeout(function(){location.href="register.html";},2000);
 						}
-					}
-			
+					}			
 				});
-				
-			}
-			else{
-			    layer.msg('验证码错误');
-			    $("#verifyCode").val('');
 			}
 		});
 		
@@ -76,30 +71,24 @@
             <br/><br/>
             <form id="form" method="post" action="index.html">
             <div class="panel">
-                <div class="panel-head" style="text-align:center;"><h2><strong>管理员登录</strong></h2></div>
+                <div class="panel-head" style="text-align:center;"><h2><strong>用户注册</strong></h2></div>
                 <div class="panel-body" style="padding:30px;">
                     <div class="form-group">
                         <div class="field field-icon-right">
-                            <input type="text" class="input" id="userName" name="userName" placeholder="登录账号" data-validate="required:请填写账号,length#>=5:账号长度不符合要求" />
+                            <input type="text" class="input" id="userName" name="userName" placeholder="注册登录账号" data-validate="required:请填写账号,length#>=5:账号长度不符合要求" />
 							<span class="icon icon-user"></span>
                         </div>
+                        <ul style="color:red;" id="userNameVerify">
+                    	</ul>
                     </div>
                     <div class="form-group">
                         <div class="field field-icon-right">
-                            <input type="password" class="input" id="password" name="password" placeholder="登录密码" data-validate="required:请填写密码,length#>=6:密码长度不符合要求" />            
+                            <input type="password" class="input" id="password" name="password" placeholder="注册登录密码" data-validate="required:请填写密码,length#>=6:密码长度不符合要求" />            
                             <span class="icon icon-key"></span>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="field">
-                            <input type="text" class="input" id="verifyCode" name="verifyCode" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
-                            <img src="images/verifyCode.jpg" width="80" height="32" class="passcode" />
-                            <p id="info"></p>
-                        </div>                  
-                    </div>      
-                    <div style="float:right"><a href="register.html" style="text-decoration:underline;color:blue;">用户注册?</a></div>
+                    </div>       
                 </div>
-                <div class="panel-foot text-center"><button type="button" id="submit" class="button button-block bg-main text-big">登录</button></div>
+                <div class="panel-foot text-center"><button type="button" id="submit" class="button button-block bg-main text-big">注册</button></div>
             </div>
             </form>
         </div>
