@@ -97,38 +97,6 @@
         	location.href="config.html?deviceId=" + deviceId;
     	});
     	
-    	//显示设备信息(点击事件)
-    	$("tr").find("#deviceName").click(function(){
-    		var deviceId = $(this).siblings("#deviceId").text();
-    		$.ajax({
-    			url:"bracelet/" + deviceId + "/getBraceletInfo",
-    			type:"get",
-    			dataType:'json',
-				contentType: 'application/json;charset=utf-8',
-    			success:
-    				function(data){
-    			   		var info = '<div style="padding:20px;"><table width="100%"><font size=4>';
-    			   		info += '<tr><td width="20%"></td><td width="20%">设备名<td>' + '<td>' + data.name + '</td><tr>';
-    			   		info += '<tr><td width="20%"></td><td width="20%">MAC<td>' + '<td>' + data.mac + '</td><tr>';
-    			   		info += '<tr><td width="20%"></td><td width="20%">固件版本<td>' + '<td>' + data.firmwareVersion + '</td><tr>';
-    			   		info += '<tr><td width="20%"></td><td width="20%">电池等级 <td>' + '<td>' + data.batteryLevel + '</td><tr>';
-    			   		info += '<tr><td width="20%"></td><td width="20%">电池状态<td>' + '<td>' + data.batteryState + '</td><tr>';
-    			   		info += '</font></table></div>';
-    			   		layer.open({
-    			   			title:'设备信息',
-        		   			type: 1,
-        		   			area: ['400px', '220px'],
-        		   			shadeClose: true, //点击遮罩关闭
-        		   			content: info
-    					});
-    		  		},
-    		  	error:
-    		  	    function(){
-    		  	    }
-    		});
-    		
-    	});
-    	
     	//修改设备别名
     	$("tr").find("#deviceAlias").click(function(){
     		var deviceId = $(this).siblings("#deviceId").text();  
@@ -156,7 +124,7 @@
     	$("tr").find("#deviceName").click(function(){
     		var deviceId = $(this).siblings("#deviceId").text();  
     		layer.prompt({
-    				title:"修改设备名",
+    				title:"修改设备名称",
     				formType:0
     			},
     			function(val){	  	
@@ -216,8 +184,8 @@
 		<div style="display:inline-block;"><label style="font-size:15px" for="readme">设备编号：</label></div>
     	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/></div>	
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<div style="display:inline-block;"><label style="font-size:15px" for="readme">设备名：</label></div>
-    	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceName" value="<%=deviceName%>" placeholder="请填入设备名"/></div>	
+		<div style="display:inline-block;"><label style="font-size:15px" for="readme">设备名称：</label></div>
+    	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceName" value="<%=deviceName%>" placeholder="请填入设备名称"/></div>	
   		<div style="display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
   		<div style="display:inline-block;"><button type="submit" id="submit" class="button button-block bg-green text-medium">查  询</button></div>
   		<div style="display:inline-block;"><button  id="clear" class="button button-block bg-green text-medium">重 置</button></div>
@@ -233,7 +201,7 @@
 								<thead>
 									<tr>	
 										<th>设备编号</th>
-        								<th>设备名    </th>
+        								<th>设备名称 </th>
         								<th>连接时间</th>
         								<th>连接状态</th>
         								<th>相关操作</th>
