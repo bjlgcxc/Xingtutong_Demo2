@@ -8,7 +8,7 @@ public class DeviceInfo implements Serializable{
 	
 	public Integer id;
 	public String imei;
-	public String mac;
+	public String name;
 	public Timestamp connectTime;
 	
 	public Integer getId() {
@@ -23,11 +23,11 @@ public class DeviceInfo implements Serializable{
 	public void setImei(String imei) {
 		this.imei = imei;
 	}
-	public String getMac() {
-		return mac;
+	public String getName() {
+		return name;
 	}
-	public void setMac(String mac) {
-		this.mac = mac;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public Timestamp getConnectTime() {
 		return connectTime;
@@ -35,5 +35,4 @@ public class DeviceInfo implements Serializable{
 	public void setConnectTime(Timestamp connectTime) {
 		this.connectTime = connectTime;
 	}
-	
 }

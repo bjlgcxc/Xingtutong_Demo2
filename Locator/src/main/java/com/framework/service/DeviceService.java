@@ -16,27 +16,20 @@ public class DeviceService {
 	public boolean hasMatchDevice(String imei){
 		return deviceDao.queryDeviceMatchCount(imei) > 0;
 	}
-	public String getDeviceMac(int id){
-		return deviceDao.queryDeviceMac(id);
-	}
-	public String getDeviceMac(String imei){
-		return deviceDao.queryDeviceMac(imei);
-	}
+	
 	public int getDeviceId(String imei){
 		return deviceDao.queryDeviceId(imei);
 	}
 	public void addDeviceInfo(DeviceInfo deviceInfo){
 		deviceDao.insertDeviceInfo(deviceInfo);
 	}
-	public void updateDevicetInfo(DeviceInfo deviceInfo){
-		deviceDao.updateDeviceInfo(deviceInfo);
-	}
+	
 	public void updateConnectTime(DeviceInfo deviceInfo){
 		deviceDao.updateConnectTime(deviceInfo);
 	}
 	
-	public List<DeviceInfo> getDeviceInfo(String deviceId,String imei,String mac){
-		return deviceDao.getDeviceInfo(deviceId,imei, mac);
+	public List<DeviceInfo> getDeviceInfo(String deviceId,String imei,String deviceName){
+		return deviceDao.getDeviceInfo(deviceId,imei,deviceName);
 	}
 
 }

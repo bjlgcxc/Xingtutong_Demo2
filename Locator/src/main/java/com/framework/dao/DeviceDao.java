@@ -25,12 +25,6 @@ public class DeviceDao {
 		return jdbcTemplate.queryForObject(sqlStr, new Object[]{id},java.lang.String.class);
 	}
 	
-	// 根据imei查询mac地址
-	public String queryDeviceMac(String imei){
-		String sqlStr = " select mac from t_device where imei=? ";
-		return jdbcTemplate.queryForObject(sqlStr, new Object[]{imei},java.lang.String.class);
-	}
-	
 	// 根据imei查询设备id号
 	public int queryDeviceId(String imei){
 		String sqlStr = " select id from t_device where imei=? ";
@@ -44,13 +38,6 @@ public class DeviceDao {
 		jdbcTemplate.update(sqlStr,args);
 	}
 	
-	// 更新设备信息 
-	public void updateDeviceInfo(DeviceInfo deviceInfo){
-		String sqlStr = " update t_device set mac=?,connectTime=? where id=? ";
-		Object args[] = new Object[]{deviceInfo.getMac(),deviceInfo.getConnectTime(),deviceInfo.getId()};
-		jdbcTemplate.update(sqlStr,args);
-	}
-	
 	// 更新手机连接后台的时间
 	public void updateConnectTime(DeviceInfo deviceInfo){
 		String sqlStr = " update t_device set connectTime=? where id=? ";
@@ -59,7 +46,7 @@ public class DeviceDao {
 	}
 	
     // 获取设备信息
-	public List<DeviceInfo> getDeviceInfo(String deviceId,String imei,String mac){
+	public List<DeviceInfo> getDeviceInfo(String deviceId,String imei,String deviceName){
 		String sql = " select * from t_device where 1=1 ";
 		if(deviceId!=null && deviceId!=""){
 			sql += " and id=" + deviceId;
@@ -67,8 +54,8 @@ public class DeviceDao {
 		if(imei!=null && imei!=""){ 
 			sql += " and imei=" + "'" + imei + "'";
 		}
-		if(mac!=null && mac!=""){
-			sql += " and mac=" + "'" + mac + "'";
+		if(deviceName!=null && deviceName!=""){ 
+			sql += " and deviceName=" + "'" + deviceName + "'";
 		}
 		
 		List<DeviceInfo> result = jdbcTemplate.query(sql,new BeanPropertyRowMapper<DeviceInfo>(DeviceInfo.class));

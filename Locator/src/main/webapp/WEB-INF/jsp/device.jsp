@@ -228,7 +228,6 @@
             						<tr id="data">
             							<td id="deviceId">${item.id}</td>
             							<td id="deviceName"><a href="#">${item.name}</a></td>
-            							<td id="deviceAlias"><a href="#">${item.alias}</a></td>
             							<td id="connectTime">${item.connectTime}</td>
             							<td id="status">未知</td>
             							<td id="operation">
