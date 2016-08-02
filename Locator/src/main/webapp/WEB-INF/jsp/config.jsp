@@ -274,7 +274,7 @@
 <%@include file="naviBar.jsp"%>
 
 <!-- Tab形式  -->
-<div class="admin">
+<div class="admin" style="font-size:15px">
 	<div>
 		<div class="label" style="display:inline-block;width:5.5%"><label for="readme">设备编号:</label></div>
     	<div class="field" style="display:inline-block;width:14%;">

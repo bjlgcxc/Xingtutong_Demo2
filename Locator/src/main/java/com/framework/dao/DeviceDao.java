@@ -62,7 +62,7 @@ public class DeviceDao {
 			sql += " and imei=" + "'" + imei + "'";
 		}
 		if(deviceName!=null && deviceName!=""){ 
-			sql += " and name=" + "'" + deviceName + "'";
+			sql += " and name like '%" + deviceName + "%'";
 		}
 		
 		List<DeviceInfo> result = jdbcTemplate.query(sql,new BeanPropertyRowMapper<DeviceInfo>(DeviceInfo.class));
