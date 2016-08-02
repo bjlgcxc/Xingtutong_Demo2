@@ -24,6 +24,10 @@ public class DeviceService {
 		deviceDao.insertDeviceInfo(deviceInfo);
 	}
 	
+	public void updateDeviceName(int deviceId,String deviceName){
+		deviceDao.updateDeviceName(deviceId,deviceName);
+	}
+	
 	public void updateConnectTime(DeviceInfo deviceInfo){
 		deviceDao.updateConnectTime(deviceInfo);
 	}
@@ -31,5 +35,5 @@ public class DeviceService {
 	public List<DeviceInfo> getDeviceInfo(String deviceId,String imei,String deviceName){
 		return deviceDao.getDeviceInfo(deviceId,imei,deviceName);
 	}
-
+	
 }

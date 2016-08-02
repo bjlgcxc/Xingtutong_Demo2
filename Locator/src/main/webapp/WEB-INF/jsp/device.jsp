@@ -32,12 +32,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
    
-    <link rel="stylesheet" href="css/pintuer.css">
-    <link rel="stylesheet" href="css/admin.css">
     <link href="css/dataTables.bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link type="image/x-icon" href="/favicon.ico" rel="shortcut icon" />
     <link href="/favicon.ico" rel="bookmark icon" />
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
    
     <script src="js/jquery-2.2.3.js"></script>
     <script src="js/pintuer.js"></script>
@@ -87,10 +87,7 @@
 
     $(document).ready(function(){
     	//设备相关操作(点击事件)
-   		$("tr").find("#health").click(function(){
-        	var deviceId = $(this).parents("td").siblings("#deviceId").text();
-        	location.href="health.html?deviceId=" + deviceId;
-    	});
+  
     	$("tr").find("#position").click(function(){
         	var deviceId = $(this).parents("td").siblings("#deviceId").text();
         	location.href="position.html?deviceId=" + deviceId;
@@ -155,6 +152,29 @@
     		); 		
     	});
     	
+    	//修改设备名
+    	$("tr").find("#deviceName").click(function(){
+    		var deviceId = $(this).siblings("#deviceId").text();  
+    		layer.prompt({
+    				title:"修改设备名",
+    				formType:0
+    			},
+    			function(val){	  	
+    				$.ajax({
+    					url:"device/" + deviceId + "/updateDeviceName",
+    					type:"post",
+    					data:{deviceName:val},
+    					success:function(){
+    						location.href="device.html";
+    					},
+    					error:function(){
+    						alert('error');
+    					}
+    				});
+    		    }
+    		); 		
+    	});
+    	
     	//判断设备的在线状态(30分钟以内为在线)		
     	$("[id=data]").each(function(){ 
     	    if($(this).find("#connectTime").text()==""){
@@ -198,12 +218,9 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<div style="display:inline-block;"><label for="readme">设备名：</label></div>
     	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceName" value="<%=deviceName%>" placeholder="请填入设备名"/></div>	
-  		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  		<div style="display:inline-block;"><label for="readme">设备别名：</label></div>
-    	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceAlias" value="<%=deviceAlias%>" placeholder="请填入设备别名"/></div>	
   		<div style="display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-  		<div style="display:inline-block;"><button type="submit" id="submit" class="button button-block bg-green text-little">查  询</button></div>
-  		<div style="display:inline-block;"><button  id="clear" class="button button-block bg-green text-small">重 置</button></div>
+  		<div style="display:inline-block;"><button type="submit" id="submit" class="button button-block bg-green text-medium">查  询</button></div>
+  		<div style="display:inline-block;"><button  id="clear" class="button button-block bg-green text-medium">重 置</button></div>
 	</form>	
 	<br/>
     <div id="page-wrapper">
@@ -217,7 +234,6 @@
 									<tr>	
 										<th>设备编号</th>
         								<th>设备名    </th>
-        								<th>设备别名</th>
         								<th>连接时间</th>
         								<th>连接状态</th>
         								<th>相关操作</th>
@@ -230,8 +246,7 @@
             							<td id="deviceName"><a href="#">${item.name}</a></td>
             							<td id="connectTime">${item.connectTime}</td>
             							<td id="status">未知</td>
-            							<td id="operation">
-            								<a class="button border-black button-medium" id="health" href="#">健康</a> 
+            							<td id="operation">    
             	    						<a class="button border-black button-medium" id="position" href="#">位置</a>
             	    						<a class="button border-black button-medium" id="config" href="#">设置</a>
             							</td>

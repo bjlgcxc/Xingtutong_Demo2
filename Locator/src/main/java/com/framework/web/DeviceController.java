@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.domain.ConfigInfo;
 import com.framework.domain.DeviceInfo;
@@ -88,16 +89,27 @@ public class DeviceController {
 		String deviceName = (String) request.getParameter("deviceName");
 	
 		JSONArray jsonArray = new JSONArray();
-		List<DeviceInfo> deviceInfo = deviceService.getDeviceInfo(deviceId,null,deviceName);
-		for(DeviceInfo df:deviceInfo){
-			JSONObject jsonObj = new JSONObject();
-			jsonObj.put("id", df.getId());
-			jsonObj.put("name", df.getName());
-			jsonObj.put("connectTime", df.getConnectTime());
-			jsonArray.add(jsonObj);
+		List<DeviceInfo> deviceInfoList = deviceService.getDeviceInfo(deviceId,null,deviceName);
+		if(deviceInfoList!=null){
+			for(DeviceInfo deviceInfo:deviceInfoList){
+				JSONObject jsonObj = new JSONObject();
+				jsonObj.put("id", deviceInfo.getId());
+				jsonObj.put("name", deviceInfo.getName());
+				jsonObj.put("connectTime", deviceInfo.getConnectTime().getTime());
+				jsonArray.add(jsonObj);
+			}
 		}
-
 		request.setAttribute("deviceInfo", jsonArray);
 		return "device";
+	}
+	
+	/*
+	 * 修改设备名
+	 */
+	@ResponseBody
+	@RequestMapping(value="/device/{deviceId}/updateDeviceName",method = RequestMethod.POST)
+	public void updateBraceletAlias(HttpServletRequest request,@PathVariable int deviceId){
+		String deviceName = request.getParameter("deviceName");
+		deviceService.updateDeviceName(deviceId,deviceName);
 	}
 }

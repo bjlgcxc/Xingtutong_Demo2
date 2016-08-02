@@ -38,6 +38,13 @@ public class DeviceDao {
 		jdbcTemplate.update(sqlStr,args);
 	}
 	
+	// 更新设备名
+	public void updateDeviceName(int deviceId,String deviceName){
+		String sql = " update t_device set name=? where id=? ";
+		Object args[] = new Object[]{deviceName,deviceId};
+		jdbcTemplate.update(sql, args);
+	}
+	
 	// 更新手机连接后台的时间
 	public void updateConnectTime(DeviceInfo deviceInfo){
 		String sqlStr = " update t_device set connectTime=? where id=? ";
@@ -55,7 +62,7 @@ public class DeviceDao {
 			sql += " and imei=" + "'" + imei + "'";
 		}
 		if(deviceName!=null && deviceName!=""){ 
-			sql += " and deviceName=" + "'" + deviceName + "'";
+			sql += " and name=" + "'" + deviceName + "'";
 		}
 		
 		List<DeviceInfo> result = jdbcTemplate.query(sql,new BeanPropertyRowMapper<DeviceInfo>(DeviceInfo.class));
