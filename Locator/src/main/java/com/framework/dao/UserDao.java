@@ -1,5 +1,7 @@
 ﻿package com.framework.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,15 +21,24 @@ public class UserDao {
 	}
 	
 	//通过用户名获取用户信息
-	public UserInfo findUserByUserName(final String userName){
+	public UserInfo findUserByUserName(String userName){
 		String sqlStr = " select * from t_user where userName =? ";
-	    UserInfo user = jdbcTemplate.query(sqlStr, new Object[]{userName},
-	    		            new BeanPropertyRowMapper<UserInfo>(UserInfo.class)).get(0);
-		return user;
+	    List<UserInfo> result = jdbcTemplate.query(sqlStr, new Object[]{userName},new BeanPropertyRowMapper<UserInfo>(UserInfo.class));
+		if(result.size()!=0)
+			return result.get(0);
+		else
+			return null;
+	}
+	
+	//插入注册信息
+	public void insertUserInfo(String userName,String password){
+		String sql = " insert into t_user(userName,password) values(?,?) ";
+		Object args[] = new Object[]{userName,password};
+		jdbcTemplate.update(sql, args);
 	}
 	
 	//更新用户登录信息
-	public void updateLoginInfo(UserInfo userInfo){
+	public void updateUserInfo(UserInfo userInfo){
 		String sqlStr = " update t_user set lastLogin=?,loginCount=? where userName=? ";
 		jdbcTemplate.update(sqlStr,new Object[]{userInfo.getLastLogin(),userInfo.getLoginCount(),userInfo.getUserName()});
 	}

@@ -22,9 +22,14 @@ public class UserService {
 		return userDao.findUserByUserName(userName);
 	}
 	
-	//3.更新用户登录信息
+	//3.添加注册信息
+	public void addUserInfo(String userName,String password){
+		userDao.insertUserInfo(userName, password);
+	}
+	
+	//4.更新用户登录信息
 	public void loginSuccess(UserInfo userInfo){
-		userDao.updateLoginInfo(userInfo);
+		userDao.updateUserInfo(userInfo);
 	}
 	
 }
