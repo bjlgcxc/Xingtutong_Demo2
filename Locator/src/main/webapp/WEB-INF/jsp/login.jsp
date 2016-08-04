@@ -39,7 +39,7 @@
 			if($("#userName").val()=='' || $("#password").val()==''){
 				layer.msg('请输入账号和密码');
 			}
-			else if($("#verifyCode").val()==<%=verifyCode%>){
+			else if($("#verifyCode").val()=='<%=verifyCode%>'){
 				$.ajax({
 					url:"user/loginCheck",
 					type:"get",			
