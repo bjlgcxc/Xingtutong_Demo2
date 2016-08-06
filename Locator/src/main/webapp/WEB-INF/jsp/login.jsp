@@ -39,7 +39,7 @@
 			if($("#userName").val()=='' || $("#password").val()==''){
 				layer.msg('请输入账号和密码');
 			}
-			else if($("#verifyCode").val()=='<%=verifyCode%>'){
+			else if($("#verifyCode").val()=='<%=verifyCode%>'){	
 				$.ajax({
 					url:"user/loginCheck",
 					type:"get",			
@@ -58,7 +58,7 @@
 				});
 				
 			}
-			else{
+			else{		
 			    layer.msg('验证码错误');
 			    $("#verifyCode").val('');
 			}
@@ -80,19 +80,19 @@
                 <div class="panel-body" style="padding:30px;">
                     <div class="form-group">
                         <div class="field field-icon-right">
-                            <input type="text" class="input" id="userName" name="userName" placeholder="登录账号" data-validate="required:请填写账号,length#>=5:账号长度不符合要求" />
+                            <input type="text" class="input" id="userName" name="userName" placeholder="填写登录账号" data-validate="length#>=5:账号长度不符合要求" />
 							<span class="icon icon-user"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="field field-icon-right">
-                            <input type="password" class="input" id="password" name="password" placeholder="登录密码" data-validate="required:请填写密码,length#>=6:密码长度不符合要求" />            
+                            <input type="password" class="input" id="password" name="password" placeholder="填写登录密码" data-validate="length#>=6:密码长度不符合要求" />            
                             <span class="icon icon-key"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="field">
-                            <input type="text" class="input" id="verifyCode" name="verifyCode" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
+                            <input type="text" class="input" id="verifyCode" name="verifyCode" placeholder="填写右侧的验证码"/>
                             <img src="images/verifyCode.jpg" width="80" height="32" class="passcode" />
                             <p id="info"></p>
                         </div>                  
