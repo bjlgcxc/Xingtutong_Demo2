@@ -47,7 +47,7 @@
 					data:{userName:$("#userName").val(),password:$("#password").val()},
 					success:function(data){
 						if(data.info=="error"){
-							layer.alert('账号或密码错误');
+							layer.msg('账号或密码错误');
 						}
 						else{
 							<%session.setAttribute("loginStatus", "login");%>

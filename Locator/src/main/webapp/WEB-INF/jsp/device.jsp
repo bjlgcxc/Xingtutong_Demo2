@@ -39,14 +39,14 @@
     <link rel="stylesheet" href="css/pintuer.css">
     <link rel="stylesheet" href="css/admin.css">
    
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-2.2.3.js"></script>
-    <script src="js/pintuer.js"></script>
     <script src="js/respond.js"></script>
     <script src="js/admin.js"></script>
     <script src="js/layer.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
     <script src="js/dataTables.bootstrap.min.js"></script> 
+    <script src="js/pintuer.js"></script>	
 </head>
 
 <script type='text/javascript'>
@@ -175,12 +175,17 @@
    	
    });
    
+   function check(){
+   	   if(isNaN(Number($("#deviceId").val()))){
+   		   return false;
+   	   }	
+   }
 </script>
 
 <body>
 <%@include file="naviBar.jsp"%>
 <div class="admin">
-	<form method="get" action="device.html">
+	<form method="get" action="device.html" onsubmit="return check();">
 		<div style="display:inline-block;"><label style="font-size:15px" for="readme">设备编号：</label></div>
     	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/></div>	
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
