@@ -30,11 +30,9 @@ public class InstructionDao {
 	
 	//≤Â»Î÷∏¡Ó
 	public void insertInstruction(Instruction instruction){
-		String sql = " insert t_instruction(deviceId,braceletInterval,braceletUpload,locationInterval,locationUpload," +
-				"locateInterval,locateTimes) values(?,?,?,?,?,?,?) ";
-		Object args[] = new Object[]{instruction.getDeviceId(),instruction.getBraceletInterval(),instruction.getBraceletUpload(),
-				instruction.getLocationInterval(),instruction.getLocationUpload(),instruction.getLocateInterval(),instruction.getLocateTimes(),
-				};
+		String sql = " insert t_instruction(deviceId,locationInterval,locationUpload,locateInterval,locateTimes) values(?,?,?,?,?) ";
+		Object args[] = new Object[]{instruction.getDeviceId(),instruction.getLocationInterval(),instruction.getLocationUpload(),
+				instruction.getLocateInterval(),instruction.getLocateTimes()};
 		jdbcTemplate.update(sql, args);
 	}	
 	

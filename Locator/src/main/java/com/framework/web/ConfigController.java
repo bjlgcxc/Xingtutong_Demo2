@@ -54,7 +54,6 @@ public class ConfigController {
 	public JSONObject getConfigInfo(@PathVariable int deviceId){
 		if(deviceService.hasMatchDevice(deviceId)){
 			ConfigInfo configInfo = configService.getConfigInfo(deviceId);
-			configInfo.braceletInterval /= 60;
 			configInfo.locationInterval /= 60;
 			return JSONObject.fromObject(configInfo);
 		}

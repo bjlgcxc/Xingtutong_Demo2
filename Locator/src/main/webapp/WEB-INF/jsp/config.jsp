@@ -61,38 +61,9 @@
 			$(this).mousedown(function(){
 				setTimeout(function(){},300);
 			});
-		});
+		});	
 		//form1表单提交事件
 		$("#submit1").click(function(){
-			var deviceId = $("#deviceId").val();
-			var braceletInterval = $("#braceletInterval").val();			
-			var braceletUpload = $("#braceletUpload").val();
-			if(deviceId=='' || (braceletInterval=='' && braceletUpload=='')){
-				return;
-			}
-			else{
-				var m = Number(braceletInterval);
-				var n = Number(braceletUpload);
-				if(isNaN(m) || isNaN(n)){			
-					return;
-				}
-				else{
-					$.ajax({
-						url:"instruction/"+ deviceId + "/saveBraceletSample",
-						data:{"braceletInterval":braceletInterval,"braceletUpload":braceletUpload},
-						type:"post",
-						success:function(){
-							layer.alert('提交成功!');
-							check();		
-						},
-						error:function(){
-						}
-					});				
-				}
-			}
-		});	
-		//form2表单提交事件
-		$("#submit2").click(function(){
 			var deviceId = $("#deviceId").val();
 			var locationInterval = $("#locationInterval").val();
 			var locationUpload = $("#locationUpload").val();
@@ -120,8 +91,8 @@
 				}
 			}
 		});		
-		//form3表单提交事件
-		$("#submit3").click(function(){
+		//form2表单提交事件
+		$("#submit2").click(function(){
 		    var deviceId = $("#deviceId").val();
 			var locateInterval = $("#locateInterval").val();
 			var locateTimes = $("#locateTimes").val();
@@ -185,9 +156,7 @@
 	    				$("form input").val('');	
 	    			}
 	    			else{		    
-	    			    $("#text").text('Info：正确的设备编号');
-						$("#braceletInterval").val(data.braceletInterval);
-						$("#braceletUpload").val(data.braceletUpload);
+	    			    $("#text").text('Info：正确的设备编号');					
 						$("#locationInterval").val(data.locationInterval);	
 						$("#locationUpload").val(data.locationUpload);
 						$("#locateInterval").val(data.locateInterval);
@@ -223,43 +192,18 @@
 	<br/>
     <div class="tab">	
       	<div class="tab-head">
-        	<strong>设备设置</strong>
-        	<ul class="tab-nav">
-          		<li class="active" id="tab1"><a href="#tab-set1">&nbsp;手环采集&nbsp;</a></li>
-          		<li><a href="#tab-set2" id="tab2">&nbsp;位置采集&nbsp;</a></li>
-          		<li><a href="#tab-set3" id="tab3">&nbsp;紧急定位&nbsp;</a></li>
+        	<strong>&nbsp;&nbsp;设备设置</strong>
+        	<ul class="tab-nav">          	
+          		<li><a href="#tab-set1" id="tab1">&nbsp;位置采集&nbsp;</a></li>
+          		<li><a href="#tab-set2" id="tab2">&nbsp;紧急定位&nbsp;</a></li>
         	</ul>
       	</div>
       	<div class="tab-body">
-        <br/>
-        <!-- 手环采集 -->
+        <br/>    
+        <!-- 位置采集 -->
         <div class="tab-panel active" id="tab-set1">
         	<br/>
-        	<form method="post" class="form-x" id="form1">       
-                <div class="form-group">
-                    <div class="label"><label for="desc">采集间隔(分钟):</label></div>
-                    <div class="field" style="width:15%;">
-                    	<input type="text" class="input" id="braceletInterval" name="braceletInterval" data-validate="number:格式错误(数字)"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="label"><label for="desc">上送条数 :</label></div>
-                    <div class="field" style="width:15%;">
-                    	<input type="text" class="input" id="braceletUpload" name="braceletUpload" data-validate="number:格式错误(数字)"/>
-                    </div>
-                </div>    
-                <br/><br/>           
-                <div>
-                	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit1" type="button">提交</button></div>
-                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
-				</div>
-            </form>
-        </div>
-        
-        <!-- 位置采集 -->
-        <div class="tab-panel" id="tab-set2">
-        	<br/>
-        	<form method="post" class="form-x" id="form2">   
+        	<form method="post" class="form-x" id="form1">   
         		<div class="form-group">
                     <div class="label"><label for="desc">采集间隔(分钟):</label></div>
                     <div class="field" style="width:15%;">
@@ -274,14 +218,14 @@
                 </div> 
                 <br/><br/>                     
                 <div>
-                	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit2" type="button">提交</button></div>
+                	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit1" type="button">提交</button></div>
                 	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
 				</div>
             </form>
         </div>
 
 		<!-- 紧急定位 -->
-        <div class="tab-panel" id="tab-set3">
+        <div class="tab-panel" id="tab-set2">
         	<br/>
         	<form method="post" class="form-x" id="form2">         
                 <div class="form-group">
@@ -298,7 +242,7 @@
                 </div>
                 <br/><br/>                      
                 <div>
-                	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit3" type="button">提交</button></div>
+                	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit2" type="button">提交</button></div>
                 	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
 				</div>
             </form>

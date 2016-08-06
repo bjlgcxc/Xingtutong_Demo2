@@ -32,24 +32,15 @@ public class ConfigDao{
 	}
 	
 	public void insertConfigInfo(ConfigInfo configInfo){
-		String sql = " insert into t_config(deviceId,braceletInterval,braceletUpload,locationInterval,locationUpload" +
-				  ",locateInterval,locateTimes) values(?,?,?,?,?,?,?) ";
-		Object args[] = new Object[]{configInfo.getDeviceId(),configInfo.getBraceletInterval(),configInfo.getBraceletUpload(),
-				configInfo.getLocationInterval(),configInfo.getLocationUpload(),configInfo.getLocateInterval(),
-				configInfo.getLocateTimes()};
+		String sql = " insert into t_config(deviceId,locationInterval,locationUpload,locateInterval,locateTimes) values(?,?,?,?,?) ";
+		Object args[] = new Object[]{configInfo.getDeviceId(),configInfo.getLocationInterval(),configInfo.getLocationUpload(),
+				configInfo.getLocateInterval(),configInfo.getLocateTimes()};
 		jdbcTemplate.update(sql, args);
 	}
 	
 	public void updateConfigInfo(ConfigInfo configInfo){
 	
 		String sql = " update t_config set deviceId=" + configInfo.getDeviceId();
-		
-		if(configInfo.getBraceletInterval()!=null){
-			sql += ",braceletInterval=" + configInfo.getBraceletInterval();
-		}
-		if(configInfo.getBraceletUpload()!=null){
-			sql += ",braceletUpload=" + configInfo.getBraceletUpload();
-		}
 		if(configInfo.getLocationInterval()!=null){
 			sql += ",locationInterval=" + configInfo.getLocationInterval();
 		}

@@ -40,9 +40,7 @@
 	  	   	  url:"sysDefault/getSysDefault",
 	  	   	  type:"get",
 	  	   	  dataType:"json",
-	  	   	  success:function(data){
-	  	   	  	  $("#braceletInterval").val(data.braceletInterval);
-				  $("#braceletUpload").val(data.braceletUpload);
+	  	   	  success:function(data){	  	   	  	  
 				  $("#locationInterval").val(data.locationInterval);	
 				  $("#locationUpload").val(data.locationUpload);
 				  $("#locateInterval").val(data.locateInterval);
@@ -57,7 +55,7 @@
     $(document).ready(function(){
   	    setDefault();
 		$(".form-reset").mousedown(function(){
-			setTimeout(function(){$(".form-reset").click()},0);
+			setTimeout(function(){$(".form-reset").click();},0);
 			setDefault();
 		});
 		
@@ -68,9 +66,7 @@
     	$.ajax({
 	  	   	  url:"sysDefault/updateSysDefault",
 	  	   	  type:"post",
-	  	   	  data:{
-	  	   	  	  "braceletInterval":$("#braceletInterval").val(),
-				  "braceletUpload":$("#braceletUpload").val(),
+	  	   	  data:{	  	   	  	 
 				  "locationInterval":$("#locationInterval").val(),	
 				  "locationUpload":$("#locationUpload").val(),
 				  "locateInterval":$("#locateInterval").val(),
@@ -96,22 +92,7 @@
    <div class="panel">
       <div class="panel-head" style="font-size:18px"><strong>系统默认配置</strong></div>
    <form class="form-x" onsubmit="return onSubmit();"> 
-       <br/><br/>
-       <div class="form-group">
-           <div class="label" style="width:20%;"><label>采集间隔(手环):&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
-           <div class="field" style="width:15%;">
-               <input type="text" class="input" id="braceletInterval" name="braceletInterval" size="50" placeholder="填写手环数据采集间隔" data-validate="required:请填写数据采集间隔,number:格式错误(数字)" />
-           </div>  
-           <div class="label" style="width:3%;"><label>分钟</label></div>          
-       </div>
-       <div class="form-group">
-           <div class="label" style="width:20%;"><label>上传条数(手环):&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
-           <div class="field" style="width:15%;">
-               <input type="text" class="input" id="braceletUpload" name="braceletUpload" size="50" placeholder="填写上传手环数据条数" data-validate="required:请填写上传数据条数,number:格式错误(数字)" />
-           </div>
-           <div class="label" style="width:2%;"><label>条</label></div> 
-       </div>
-       <br/>
+       <br/><br/>    
        <div class="form-group">
            <div class="label" style="width:20%;"><label>采集间隔(位置):&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
            <div class="field" style="width:15%;">

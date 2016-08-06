@@ -64,8 +64,6 @@ public class DeviceController {
 			SystemInfo sysDefault = systemService.getSysDefault();
 			ConfigInfo configInfo = new ConfigInfo();
 			configInfo.setDeviceId(id);
-			configInfo.setBraceletInterval(sysDefault.getBraceletInterval());
-			configInfo.setBraceletUpload(sysDefault.getBraceletUpload());
 			configInfo.setLocationInterval(sysDefault.getLocationInterval());
 			configInfo.setLocationUpload(sysDefault.getLocationUpload());
 			configInfo.setLocateInterval(sysDefault.getLocateInterval());

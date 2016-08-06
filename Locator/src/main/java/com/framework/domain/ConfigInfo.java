@@ -6,8 +6,6 @@ import java.io.Serializable;
 public class ConfigInfo implements Serializable{
 	
 	public Integer deviceId;
-	public Integer braceletInterval;
-	public Integer braceletUpload;
 	public Integer locationInterval;
 	public Integer locationUpload;
 	public Integer locateInterval;
@@ -18,18 +16,6 @@ public class ConfigInfo implements Serializable{
 	}
 	public void setDeviceId(Integer deviceId) {
 		this.deviceId = deviceId;
-	}
-	public Integer getBraceletInterval() {
-		return braceletInterval;
-	}
-	public void setBraceletInterval(Integer braceletInterval) {
-		this.braceletInterval = braceletInterval;
-	}
-	public Integer getBraceletUpload() {
-		return braceletUpload;
-	}
-	public void setBraceletUpload(Integer braceletUpload) {
-		this.braceletUpload = braceletUpload;
 	}
 	public Integer getLocationInterval() {
 		return locationInterval;

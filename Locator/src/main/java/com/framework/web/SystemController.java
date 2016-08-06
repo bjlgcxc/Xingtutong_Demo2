@@ -24,7 +24,6 @@ public class SystemController {
 	@RequestMapping(value="/sysDefault/getSysDefault",method=RequestMethod.GET)
 	public JSONObject getSysDefault(HttpServletRequest request){
 		SystemInfo systemInfo = systemService.getSysDefault();
-		systemInfo.setBraceletInterval(systemInfo.getBraceletInterval()/60);
 		systemInfo.setLocationInterval(systemInfo.getLocationInterval()/60);
 		return JSONObject.fromObject(systemInfo);
 	}
@@ -32,7 +31,6 @@ public class SystemController {
 	@ResponseBody
 	@RequestMapping(value="/sysDefault/updateSysDefault",method=RequestMethod.POST)
 	public void updateSysDefault(HttpServletRequest request,SystemInfo sysInfo){
-		sysInfo.setBraceletInterval(sysInfo.getBraceletInterval()*60);
 		sysInfo.setLocationInterval(sysInfo.getLocationInterval()*60);
 		systemService.updateSysDefault(sysInfo);
 	}

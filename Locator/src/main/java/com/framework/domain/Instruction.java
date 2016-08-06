@@ -8,8 +8,6 @@ public class Instruction implements Serializable{
 	
 	Integer deviceId;
 	Integer isSend;
-	Integer braceletInterval;
-	Integer braceletUpload;
 	Integer locationInterval;
 	Integer locationUpload;
 	Integer locateInterval;
@@ -27,18 +25,6 @@ public class Instruction implements Serializable{
 	}
 	public void setIsSend(Integer isSend) {
 		this.isSend = isSend;
-	}
-	public Integer getBraceletInterval() {
-		return braceletInterval;
-	}
-	public void setBraceletInterval(Integer braceletInterval) {
-		this.braceletInterval = braceletInterval;
-	}
-	public Integer getBraceletUpload() {
-		return braceletUpload;
-	}
-	public void setBraceletUpload(Integer braceletUpload) {
-		this.braceletUpload = braceletUpload;
 	}
 	public Integer getLocationInterval() {
 		return locationInterval;

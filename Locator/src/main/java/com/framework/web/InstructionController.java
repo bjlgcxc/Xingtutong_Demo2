@@ -43,27 +43,6 @@ public class InstructionController {
 	
 	
 	/*
-	 * 保存手环数据采集指令
-	 */
-	@ResponseBody
-	@RequestMapping(value="/instruction/{deviceId}/saveBraceletSample",method=RequestMethod.POST)
-	public void saveSampleInterval(HttpServletRequest request,@PathVariable int deviceId,Instruction instruction){
-		instruction.setDeviceId(deviceId);		
-		if(instruction.getBraceletInterval()!=null){
-			instruction.setBraceletInterval(60*instruction.getBraceletInterval());
-		}
-		instructionService.addInstruction(instruction);
-		
-		//更新设置信息
-		ConfigInfo configInfo = new ConfigInfo();
-		configInfo.setDeviceId(deviceId);
-		configInfo.setBraceletInterval(instruction.getBraceletInterval());
-		configInfo.setBraceletUpload(instruction.getBraceletUpload());
-		configService.updateConfigInfo(configInfo);
-	}
-
-	
-	/*
 	 * 保存位置采集指令
 	 */
 	@ResponseBody
@@ -98,22 +77,6 @@ public class InstructionController {
 		configInfo.setDeviceId(deviceId);
 		configInfo.setLocateInterval(instruction.getLocateInterval());
 		configInfo.setLocateTimes(instruction.getLocateTimes());
-		configService.updateConfigInfo(configInfo);
-	}
-	
-
-	/*
-	 * 保存基本设置(指令)
-	 */
-	@ResponseBody
-	@RequestMapping(value="/instruction/{deviceId}/saveBasicInfo",method=RequestMethod.POST)
-	public void saveBasicInfo(HttpServletRequest request,@PathVariable int deviceId,Instruction instruction){
-		instruction.setDeviceId(deviceId);
-		instructionService.addInstruction(instruction);
-		
-		//更新设置信息
-		ConfigInfo configInfo = new ConfigInfo();
-		configInfo.setDeviceId(deviceId);
 		configService.updateConfigInfo(configInfo);
 	}
 	
