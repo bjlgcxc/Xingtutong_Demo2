@@ -44,6 +44,7 @@
        <mvc:view-controller path="/register.html" view-name="register"/>
        <mvc:view-controller path="/index.html" view-name="index"/>
        <mvc:view-controller path="/config.html" view-name="config"/>
+       <mvc:view-controller path="/system.html" view-name="system"/>
        <mvc:view-controller path="/position.html" view-name="position"/>
 	 
 	   <!-- 对静态资源的访问 的设置(由于restful风格)-->  

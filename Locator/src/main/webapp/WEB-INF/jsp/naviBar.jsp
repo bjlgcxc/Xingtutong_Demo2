@@ -21,6 +21,7 @@
                 <li id="user"><a href="device.html" class="icon-user"> 设备</a></li>    
                 <li id="position"><a href="position.html" class="icon-map-marker"> 位置</a></li>
                 <li id="config"><a href="config.html" class="icon-cog"> 设置</a></li>
+                <li id="system"><a href="system.html" class="icon-desktop"> 系统</a></li>
             </ul>
         </div>
     </div>

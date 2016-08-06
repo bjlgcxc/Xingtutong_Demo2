@@ -187,7 +187,7 @@
 <div class="admin">
 	<form method="get" action="device.html" onsubmit="return check();">
 		<div style="display:inline-block;"><label style="font-size:15px" for="readme">设备编号：</label></div>
-    	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/></div>	
+    	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceId" id="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/></div>	
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<div style="display:inline-block;"><label style="font-size:15px" for="readme">设备名称：</label></div>
     	<div class="field" style="display:inline-block;width:15%;"><input class="input_" type="text" name="deviceName" value="<%=deviceName%>" placeholder="请填入设备名称"/></div>	
