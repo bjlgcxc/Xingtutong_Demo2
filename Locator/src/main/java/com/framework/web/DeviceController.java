@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.domain.ConfigInfo;
 import com.framework.domain.DeviceInfo;
+import com.framework.domain.SystemInfo;
 import com.framework.service.ConfigService;
 import com.framework.service.DeviceService;
 import com.framework.service.InstructionService;
+import com.framework.service.SystemService;
 
 @Controller
 public class DeviceController {
@@ -30,6 +32,8 @@ public class DeviceController {
 	InstructionService instructionService;
 	@Autowired
 	ConfigService configService;
+	@Autowired
+	SystemService systemService;
 	
 	/*
 	 * 手机登录app,发送手机信息(imei)到后台,后台返给app相应的设备id
@@ -57,9 +61,15 @@ public class DeviceController {
 		
 		//若没有配置信息，则插入默认配置
 		if(!configService.hasMatchConfig(id)){
+			SystemInfo sysDefault = systemService.getSysDefault();
 			ConfigInfo configInfo = new ConfigInfo();
-			configInfo.setSampleInterval(60);
-			configInfo.setUploadEverytime(1);
+			configInfo.setDeviceId(id);
+			configInfo.setBraceletInterval(sysDefault.getBraceletInterval());
+			configInfo.setBraceletUpload(sysDefault.getBraceletUpload());
+			configInfo.setLocationInterval(sysDefault.getLocationInterval());
+			configInfo.setLocationUpload(sysDefault.getLocationUpload());
+			configInfo.setLocateInterval(sysDefault.getLocateInterval());
+			configInfo.setLocateTimes(sysDefault.getLocateTimes());
 			configService.insertConfigInfo(configInfo);
 		}
 				
@@ -89,7 +99,7 @@ public class DeviceController {
 		String deviceName = (String) request.getParameter("deviceName");
 	
 		JSONArray jsonArray = new JSONArray();
-		List<DeviceInfo> deviceInfoList = deviceService.getDeviceInfo(deviceId,null,deviceName);
+		List<DeviceInfo> deviceInfoList = deviceService.getDeviceInfo(deviceId,deviceName);
 		if(deviceInfoList!=null){
 			for(DeviceInfo deviceInfo:deviceInfoList){
 				JSONObject jsonObj = new JSONObject();

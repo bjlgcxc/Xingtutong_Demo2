@@ -3,9 +3,9 @@ package com.framework.domain;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class ConfigInfo implements Serializable{
-	
-	public Integer deviceId;
+public class SystemInfo implements Serializable{
+
+	public Integer id;
 	public Integer braceletInterval;
 	public Integer braceletUpload;
 	public Integer locationInterval;
@@ -13,11 +13,11 @@ public class ConfigInfo implements Serializable{
 	public Integer locateInterval;
 	public Integer locateTimes;
 	
-	public Integer getDeviceId() {
-		return deviceId;
+	public Integer getId() {
+		return id;
 	}
-	public void setDeviceId(Integer deviceId) {
-		this.deviceId = deviceId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public Integer getBraceletInterval() {
 		return braceletInterval;
@@ -55,5 +55,5 @@ public class ConfigInfo implements Serializable{
 	public void setLocateTimes(Integer locateTimes) {
 		this.locateTimes = locateTimes;
 	}
-	
+
 }

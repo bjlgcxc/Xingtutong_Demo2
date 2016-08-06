@@ -149,32 +149,7 @@
 				}
 			}
 		});			
-		//form4表单提交事件
-		$("#submit4").click(function(){
-		    var deviceId = $("#deviceId").val();
-			var teleNumber = $("#teleNumber").val();
-			if(teleNumber=='' || deviceId==''){
-				return;
-			}
-			else{
-				var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
-				if(!myreg.test(teleNumber)){
-					return;	
-				}
-				$.ajax({
-				     url:"instruction/"+ deviceId + "/saveBasicInfo",
-					 data:{"teleNumber":teleNumber},
-					 type:"post",
-					 success:function(data){
-						layer.alert('提交成功');
-						check();
-					 },
-					 error:function(){
-					 }}
-				);						
-			}
-		});
-			
+				
 		//deviceId的check
 		check();
 		if($("#deviceId").val()==''){
@@ -216,8 +191,7 @@
 						$("#locationInterval").val(data.locationInterval);	
 						$("#locationUpload").val(data.locationUpload);
 						$("#locateInterval").val(data.locateInterval);
-						$("#locateTimes").val(data.locateTimes);
-						$("#teleNumber").val(data.teleNumber);    			    
+						$("#locateTimes").val(data.locateTimes);		 			    
 	    			}
 	    		},
 			error:
@@ -254,7 +228,6 @@
           		<li class="active" id="tab1"><a href="#tab-set1">&nbsp;手环采集&nbsp;</a></li>
           		<li><a href="#tab-set2" id="tab2">&nbsp;位置采集&nbsp;</a></li>
           		<li><a href="#tab-set3" id="tab3">&nbsp;紧急定位&nbsp;</a></li>
-          		<li><a href="#tab-set4" id="tab4">&nbsp;基本信息&nbsp;</a></li>
         	</ul>
       	</div>
       	<div class="tab-body">
@@ -329,28 +302,7 @@
                 	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
 				</div>
             </form>
-        </div>
-        
-        <!-- 基本信息 -->
-        <div class="tab-panel" id="tab-set4">
-        	<br/>
-        	<form method="post" class="form-x" id="form3">         
-                <div class="form-group">
-                    <div class="label"><label for="desc">短信通知号码: </label></div>
-                    <div class="field" style="width:15%;">
-                    	<input type="text" class="input" id="teleNumber" data-validate="mobile:格式错误(手机号码)"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                   	<div class="label"><label>&nbsp;</label></div>
-                </div> 
-                <br/><br/>
-                <div>
-                	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit4" type="button">提交</button></div>
-                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
-				</div>
-            </form>
-        </div> 
+         </div>
       </div>
     </div>
 </div>
