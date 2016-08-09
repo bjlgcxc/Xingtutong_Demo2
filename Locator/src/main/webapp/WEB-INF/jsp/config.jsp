@@ -4,12 +4,7 @@
     String context = request.getContextPath();
     request.setAttribute("context",context);
     request.setAttribute("page", "config");
-    
-    String loginState = "notLogin";
-  	if(session.getAttribute("loginState")!=null){
-  		loginState = "login";
-  	}
-    
+   
     String deviceId = request.getParameter("deviceId");
     if(deviceId==null){
     	deviceId = "";
@@ -39,10 +34,6 @@
 </head>
 
 <script type='text/javascript'>
-	if('<%=loginState%>' == 'notLogin'){
-	   	 location.href = "login.html";
-	}
-	
 	$(document).ready(function(){
 		//submit按钮的点击事件
 		$("[id^=submit]").each(function(){

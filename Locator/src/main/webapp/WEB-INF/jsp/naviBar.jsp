@@ -36,6 +36,11 @@
   				content: $("#dialog")
 			});
 			$("#password").focus();
+			$(document).keydown(function (e) {
+            	if (e.keyCode == 13) {
+                	$("#confirm").click();
+            	}
+        	});
  		});	
  		
  		$("#confirm").click(function(){
