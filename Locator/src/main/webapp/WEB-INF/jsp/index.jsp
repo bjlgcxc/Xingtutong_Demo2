@@ -61,6 +61,7 @@
                    	    <p><a href="device.html">1.设备信息管理：设备信息查询、修改</a></p>             		
                 	    <p><a href="position.html">2.位置信息管理：位置信息显示</a></p>
                		    <p><a href="config.html">3.设备相关设置：设备设置</a></p>
+               		    <p><a href="system.html">4.系统默认设置：系统设置</a></p>
                		</div>
                	    <br/>
                	</div>
