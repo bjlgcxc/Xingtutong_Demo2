@@ -14,7 +14,6 @@ public class SystemDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	
 	public SystemInfo querySysDefault(){
 		String sql = " select * from t_system ";
 		List<SystemInfo> result = jdbcTemplate.query(sql,new BeanPropertyRowMapper<SystemInfo>(SystemInfo.class));

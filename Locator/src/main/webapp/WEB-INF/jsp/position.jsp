@@ -5,12 +5,7 @@
 	String context = request.getContextPath();
     request.setAttribute("context",context);
     request.setAttribute("page", "position");
-    
-    String loginState = "notLogin";
-  	if(session.getAttribute("loginState")!=null){
-  		loginState = "login";
-  	}
-    
+   
     String deviceId = request.getParameter("deviceId");
     if(deviceId==null){
     	deviceId = "";
@@ -57,10 +52,6 @@
 </head>
 
 <script type="text/javascript">
-	if('<%=loginState%>' == 'notLogin'){
-	   	location.href = "login.html";
-	}
-
 	var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
 	$(function() {
 	    $("#query").click(function(){

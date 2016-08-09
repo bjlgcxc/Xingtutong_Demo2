@@ -67,7 +67,13 @@
 			var deviceId = $("#deviceId").val();
 			var locationInterval = $("#locationInterval").val();
 			var locationUpload = $("#locationUpload").val();
-			if(deviceId=='' || (locationInterval=='' && locationUpload=='')){
+			if(deviceId=='' || locationInterval=='' || locationUpload==''){
+				if(locationUpload==''){
+					$("#locationUpload").focus();
+				}
+				if(locationInterval==''){
+					$("#locationInterval").focus();
+				}
 				return ;
 			}
 			else{
@@ -96,7 +102,13 @@
 		    var deviceId = $("#deviceId").val();
 			var locateInterval = $("#locateInterval").val();
 			var locateTimes = $("#locateTimes").val();
-			if(deviceId=='' || (locateTimes=='' && locateInterval=='')){
+			if(deviceId=='' || locateTimes=='' || locateInterval==''){
+				if(locateTimes==''){
+					$("#locateTimes").focus();
+				}
+				if(locateInterval==''){
+					$("#locateInterval").focus();
+				}
 				return ;
 			}
 			else{
