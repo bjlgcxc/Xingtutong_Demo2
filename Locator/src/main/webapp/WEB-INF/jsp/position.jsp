@@ -5,7 +5,7 @@
 	String context = request.getContextPath();
     request.setAttribute("context",context);
     request.setAttribute("page", "position");
-   
+    
     String deviceId = request.getParameter("deviceId");
     if(deviceId==null){
     	deviceId = "";
@@ -54,6 +54,15 @@
 <script type="text/javascript">
 	var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
 	$(function() {
+		$("#deviceId").focus().val($("#deviceId").val());
+	    $("body").keydown(function() {
+            if (event.keyCode == "13") {//keyCode=13是回车键
+                $("#query").focus();
+                $("#query").click();
+                $("#deviceId").focus();
+            }
+        });
+	    
 	    $("#query").click(function(){
 	    	if($("#deviceId").val()==''){
 	    		layer.msg('Tips：请先填写设备ID');
@@ -61,17 +70,17 @@
 	    	}
 	    });
 	    
-	    $( "#start" ).datetimepicker({
+	    $("#start").datetimepicker({
 	        timeFormat: "HH:mm:ss",
-               dateFormat: "yy-mm-dd",
-               changeMonth: true,
-               changeYear: true
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true
 	    });
 	    $( "#end" ).datetimepicker({
 	        timeFormat: "HH:mm:ss",
-               dateFormat: "yy-mm-dd",
-               changeMonth: true,
-               changeYear: true          
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true          
 	    });
 	    var nowtime = getNowFormatDate(); 
 			var starttime = GetDateStr();
@@ -79,13 +88,15 @@
         $('#end').val(nowtime); 
         
         if($("#deviceId").val()!=''){
-  				$("#query").trigger("click");
-  			}
+  			$("#query").trigger("click");
+  		}
   			
-  			$("#reset").click(function(){
-  				$("#deviceId").val('');
+  		$("#refresh").click(function(){
+  			if($("#deviceId").val()!='')
   				gjcx();
-  			});
+  			else
+  				$("#deviceId").focus();
+  		});
  
 	});
 		
@@ -105,7 +116,7 @@
 	             return;  
 	          }  
 	    }	
-	    gjcxPositionLine("GET","position/"+$("#deviceId").val()+"/getPositionInfo?st="+st+"&et="+et,status,'测试');//位置轨迹线-一次性展现24小时的轨迹	     	    
+	    gjcxPositionLine("GET","position/"+$("#deviceId").val()+"/getPositionInfo?st="+st+"&et="+et,status,'定位信息');//位置轨迹线-一次性展现24小时的轨迹	     	    
 	}
 	
 	//轨迹查询-位置连线-轨迹
@@ -170,7 +181,8 @@
 							marker.on('click', markerClick);
 							//marker.emit('click', {target: marker});	            
 					    }else{
-			                msg("提示信息","无位置信息！");
+			                //msg("提示信息","无位置信息!");
+					    	layer.msg("无位置信息!");
 					    }
 					    }
 					    
@@ -186,13 +198,13 @@
 		           
 				    map3.setFitView();				 				 
 	            }else{
-	            	msg("提示信息","无位置信息！");
+	            	//msg("提示信息","无位置信息!");
+	            	layer.msg("无位置信息!");
 	            }
 			},
 			error:function(result){
-				msg("提示信息","无位置信息！");
-				//var str=result.responseText;
-	   			//msg("系统异常",str);
+				//msg("提示信息","无位置信息!");
+				layer.msg("无位置信息!");
 			}
 		});
 			
@@ -300,14 +312,15 @@
 <%@include file="naviBar.jsp"%>
 <div class="admin" style="padding:8px">
 	<div class="label" style="display:inline-block;"><label style="font-size:15px">设备编号：</label></div>
-   	<div class="field" style="display:inline-block;width:13%;"><input class="input_" type="text" id="deviceId" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/></div>&nbsp;&nbsp;&nbsp;&nbsp;
-   	&nbsp;&nbsp;
+   	<div class="field" style="display:inline-block;width:13%;"><input class="input_" type="text" id="deviceId" name="deviceId" value="<%=deviceId%>" placeholder="请填入设备编号"/></div>
+   	&nbsp;&nbsp;&nbsp;&nbsp;
     <div class="label" style="display:inline-block;"><label style="font-size:15px">时间：</label></div>
     <div class="field" style="display:inline-block;width:13%;"><input class="input" id="start" type="text"/></div>
     <div class="label" style="display:inline-block;"><label>~</label></div>
-    <div class="field" style="display:inline-block;width:13%;"><input class="input" id="end" type="text"/></div>&nbsp;&nbsp;&nbsp;&nbsp;
-    <button class="button bg-green text-meidum" id="query" onclick="gjcx()">查  询</button>
-    <button class="button bg-green text-meidum" id="reset">重  置</button>
+    <div class="field" style="display:inline-block;width:13%;"><input class="input" id="end" type="text"/></div>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="button bg-green text-meidum icon-search"  id="query" onclick="gjcx()"> 查询</button>
+    <button class="button bg-green text-meidum icon-refresh" id="refresh"> 刷新</button>
 	<div id="" style="height:10px"></div>
     <div id="allmap"></div>
 </div>

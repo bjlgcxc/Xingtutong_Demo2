@@ -102,4 +102,15 @@ public class UserController {
 		session.setAttribute("user", user);
 	}
 	
+	
+	@RequestMapping(value="logout.html")
+	public String logout(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession(false);	
+		if(session!=null){
+			session.removeAttribute("loginState");
+			session.invalidate();
+		}
+		return "redirect:index.html";
+	}
+	
 }

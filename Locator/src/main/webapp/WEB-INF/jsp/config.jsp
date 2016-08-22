@@ -35,6 +35,8 @@
 
 <script type='text/javascript'>
 	$(document).ready(function(){
+		$("#deviceId").focus().val($("#deviceId").val());
+		
 		//submit按钮的点击事件
 		$("[id^=submit]").each(function(){
 			$(this).click(function(){
@@ -59,11 +61,14 @@
 			var locationInterval = $("#locationInterval").val();
 			var locationUpload = $("#locationUpload").val();
 			if(deviceId=='' || locationInterval=='' || locationUpload==''){
-				if(locationUpload==''){
-					$("#locationUpload").focus();
-				}
-				if(locationInterval==''){
-					$("#locationInterval").focus();
+				if(deviceId!=''){
+					if(locationUpload==''){
+						$("#locationUpload").focus();
+					}
+					if(locationInterval==''){
+						$("#locationInterval").focus();
+					}
+					
 				}
 				return ;
 			}
@@ -94,11 +99,13 @@
 			var locateInterval = $("#locateInterval").val();
 			var locateTimes = $("#locateTimes").val();
 			if(deviceId=='' || locateTimes=='' || locateInterval==''){
-				if(locateTimes==''){
-					$("#locateTimes").focus();
-				}
-				if(locateInterval==''){
-					$("#locateInterval").focus();
+				if(deviceId!=''){
+					if(locateTimes==''){
+						$("#locateTimes").focus();
+					}
+					if(locateInterval==''){
+						$("#locateInterval").focus();
+					}
 				}
 				return ;
 			}
@@ -222,8 +229,8 @@
                 </div> 
                 <br/><br/>                     
                 <div>
-                	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit1" type="button">提交</button></div>
-                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
+                	<div style="float:left;width:22%;text-align:right"><button class="button bg-main text-medium icon-check" id="submit1" type="button"> 提交</button></div>
+                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset text-medium icon-undo" type="button"> 重置</button></div>
 				</div>
             </form>
         </div>
@@ -246,8 +253,8 @@
                 </div>
                 <br/><br/>                      
                 <div>
-                	<div style="float:left;width:20%;text-align:right"><button class="button bg-main" id="submit2" type="button">提交</button></div>
-                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset" type="button">重置</button></div>
+                	<div style="float:left;width:22%;text-align:right"><button class="button bg-main text-medium icon-check" id="submit2" type="button"> 提交</button></div>
+                	<div style="float:left;padding:0px 0px 0px 15px"><button class="button bg-main form-reset text-medium icon-undo" type="button"> 重置</button></div>
 				</div>
             </form>
          </div>
