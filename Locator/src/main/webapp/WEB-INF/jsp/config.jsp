@@ -195,14 +195,15 @@
 	<br/>
     <div class="tab">	
       	<div class="tab-head">
-        	<strong>&nbsp;&nbsp;设备设置</strong>
+        	<strong>设备设置</strong>
         	<ul class="tab-nav">          	
-          		<li><a href="#tab-set1" id="tab1">&nbsp;位置采集&nbsp;</a></li>
+          		<li class="active" id="tab1"><a href="#tab-set1" id="tab1">&nbsp;位置采集&nbsp;</a></li>
           		<li><a href="#tab-set2" id="tab2">&nbsp;紧急定位&nbsp;</a></li>
         	</ul>
       	</div>
       	<div class="tab-body">
         <br/>    
+        
         <!-- 位置采集 -->
         <div class="tab-panel active" id="tab-set1">
         	<br/>
@@ -211,10 +212,10 @@
                     <div class="label"><label for="desc">采集间隔(分钟):</label></div>
                     <div class="field" style="width:15%;">
                     	<input type="text" class="input" id="locationInterval" name="locationInterval"  data-validate="number:格式错误(数字)"/>
-                    </div>
+                    </div>	
                 </div>      
                 <div class="form-group">
-                    <div class="label"><label for="desc">上送条数 : </label></div>
+                    <div class="label"><label for="desc">上送条数: </label></div>
                     <div class="field" style="width:15%;">
                     	<input type="text" class="input" id="locationUpload" name="locationUpload" data-validate="number:格式错误(数字)"/>
                     </div>
@@ -232,13 +233,13 @@
         	<br/>
         	<form method="post" class="form-x" id="form2">         
                 <div class="form-group">
-                    <div class="label"><label for="desc">定位间隔(秒) : </label></div>
+                    <div class="label"><label for="desc">定位间隔(秒): </label></div>
                     <div class="field" style="width:15%;">
                     	<input type="text" class="input" id="locateInterval" name="locateInterval" data-validate="number:格式错误(数字)"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="label"><label for="desc">定位次数 :</label></div>
+                    <div class="label"><label for="desc">定位次数: </label></div>
                     <div class="field" style="width:15%;">
                     	<input type="text" class="input" id="locateTimes" name="locateTimes" data-validate="number:格式错误(数字)"/>
                     </div>

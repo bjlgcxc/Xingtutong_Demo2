@@ -3,9 +3,9 @@
 <%  
 	String loginState = "notLogin";
   	if(session.getAttribute("loginState")!=null){
-  		loginState = "login";
+  		loginState = (String)session.getAttribute("loginState");
   	}
-  	
+
   	UserInfo user = new UserInfo();
   	if(session.getAttribute("user")!=null){
    		 user = (UserInfo)session.getAttribute("user");
@@ -17,15 +17,69 @@
 <script type='text/javascript'>
    //登录状态是否过期
    if('<%=loginState%>' == 'notLogin'){
-   	    location.href = "login.html";
+   	    location.href = "login.html";	
    }
    
-   $(document).ready(function(){
-   		$("#<%=request.getAttribute("page")%>").addClass("active");
-   		$("#logOut").click(function(){
-   			location.href="login.html";
+   function startTime(){  
+	    var today = new Date();  
+	    var y = today.getFullYear();
+	    var M = today.getMonth();
+	    var d = today.getDate();
+	    var h = today.getHours();  
+		var m = today.getMinutes();  
+	    var s = today.getSeconds();  
+	    m = checkTime(m);  
+		s = checkTime(s); 
+		$("#time").text(y + "年" + M + "月" + d + "日"  + " " + h + ":" + m + ":" + s);  
+		t = setTimeout('startTime()',500);  
+   }  
+   function checkTime(i){  
+		if (i<10){
+			i="0" + i;
+		}  
+  		return i;  	
+   }  
+   
+   $(document).ready(function(){  
+   		//clock
+   		startTime(); 
+   		//登录超时		
+   		var timer;
+   		var old = event.x;
+   		$("body").mousemove = function(){	
+   			if(event.x!=old){
+	   			if(timer!=null){
+	   			    clearTimeout(timer);
+	   			}
+	   			timer = setTimeout(function(){
+	   				location.href = "logout.html";
+	   			},10*60*1000); 
+	   		}
+	   		old = event.x;
+   		};
+   		$(document).click(function(){
+   			if(timer!=null){
+	   			clearTimeout(timer);
+	   		}
+	   		timer = setTimeout(function(){
+	   			location.href = "logout.html";
+	   		},10*60*1000); 
    		});
-   			
+   		$(document).keypress(function(){
+   			if(timer!=null){
+	   			clearTimeout(timer);
+	   		}
+	   		timer = setTimeout(function(){
+	   			location.href = "logout.html";
+	   		},10*60*1000); 
+   		});
+   	
+   		$("#<%=request.getAttribute("page")%>").addClass("active");
+   		//注销登录
+   		$("#logOut").click(function(){
+   			location.href="logout.html";
+   		});
+   		//修改密码
  		$("#change").click(function(){
  			layer.open({
   				type: 1,
@@ -42,14 +96,7 @@
             	}
         	});
  		});	
- 		
- 		$("#confirm").click(function(){
- 			$(document).keydown(function (e) {
-            	if (e.keyCode == 13) {
-                	return false;
-            	}
-        	});
- 		
+ 		$("#confirm").click(function(){ 		
  			var psw = $("#password").val();
  			var newPsw1 = $("#newPassword1").val();
  			var newPsw2 = $("#newPassword2").val();
@@ -88,9 +135,10 @@
     <div class="mainer">
         <div class="admin-navbar">
             <span class="float-right">
-            	<a class="button button-small bg-main" href="index.html">&nbsp;&nbsp;首&nbsp;&nbsp;页&nbsp;&nbsp;</a>
-                <a class="button button-small bg-red" id="logOut" href="#">&nbsp;&nbsp;注&nbsp;&nbsp;销&nbsp;&nbsp;</a>
-                <button class="button button-small bg-yellow" id="change">修改密码</button>
+            	<label style="font-size:15px" for="readme" id="time"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+            	<a class="button button-small bg-main icon-home" href="index.html">&nbsp;&nbsp;首&nbsp;&nbsp;页&nbsp;&nbsp;</a>
+                <a class="button button-small bg-red icon-power-off" id="logOut" href="#">&nbsp;&nbsp;注&nbsp;&nbsp;销&nbsp;&nbsp;</a>
+                <button class="button button-small bg-yellow icon-pencil" id="change"> 修改密码</button>
             </span>
 			<div class="dialog" id="dialog">
 				<div class="dialog-head">
@@ -132,7 +180,8 @@
 			
             <ul class="nav nav-inline admin-nav">
                 <li id="index"><a href="index.html" class="icon-home"> 首页</a></li>	
-                <li id="user"><a href="device.html" class="icon-rocket"> 设备</a></li>    
+                <li id="user"><a href="device.html" class="icon-rocket"> 设备</a></li>
+                <li id="health"><a href="health.html" class="icon-heart"> 健康</a></li>      
                 <li id="position"><a href="position.html" class="icon-map-marker"> 位置</a></li>
                 <li id="config"><a href="config.html" class="icon-cog"> 设置</a></li>
                 <li id="system"><a href="system.html" class="icon-desktop"> 系统</a></li>

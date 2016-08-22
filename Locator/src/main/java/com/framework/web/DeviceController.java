@@ -40,7 +40,7 @@ public class DeviceController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/app/device/{imei}/appLogin")
-	public DeviceInfo appLogin(@PathVariable String imei){
+	public synchronized JSONObject appLogin(@PathVariable String imei){
 		
 		DeviceInfo deviceInfo = new DeviceInfo();
 		deviceInfo.setImei(imei);
@@ -53,16 +53,13 @@ public class DeviceController {
 			deviceService.updateConnectTime(deviceInfo);
 		}
 		
-		//返回imei和id的对应信息
+		//configInfo
 		int id = deviceService.getDeviceId(imei);
-		deviceInfo = new DeviceInfo();
-		deviceInfo.setId(id);
-		deviceInfo.setImei(imei);
-		
-		//若没有配置信息，则插入默认配置
+		ConfigInfo configInfo = null;
 		if(!configService.hasMatchConfig(id)){
+			//若没有配置信息，则插入默认配置
 			SystemInfo sysDefault = systemService.getSysDefault();
-			ConfigInfo configInfo = new ConfigInfo();
+			configInfo = new ConfigInfo();
 			configInfo.setDeviceId(id);
 			configInfo.setLocationInterval(sysDefault.getLocationInterval());
 			configInfo.setLocationUpload(sysDefault.getLocationUpload());
@@ -70,9 +67,14 @@ public class DeviceController {
 			configInfo.setLocateTimes(sysDefault.getLocateTimes());
 			configService.insertConfigInfo(configInfo);
 		}
+		else{
+			configInfo = configService.getConfigInfo(id);
+		}
 				
-		log.info("get imei and return id");
-		return deviceInfo;
+		log.info("send device_id and config_info to device");
+		JSONObject jsonObj = JSONObject.fromObject(configInfo);
+		jsonObj.put("id",configInfo.getDeviceId());
+		return jsonObj;
 	}
 	
 	
