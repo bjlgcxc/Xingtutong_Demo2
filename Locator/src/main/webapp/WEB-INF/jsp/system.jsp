@@ -42,7 +42,6 @@
 				  $("#locateTimes").val(data.locateTimes); 	
 	  	   	  },
 	  	   	  error:function(){
-	  	   	  	alert('error');
 	  	   	  }	   
 	  	});	
 	}
@@ -96,14 +95,14 @@
            <div class="field" style="width:15%;">
                <input type="text" class="input" id="locationInterval" name="locationInterval" size="50" data-validate="required:请填写数据采集间隔,number:格式错误(数字)" />
            </div>
-           <div class="label" style="width:3%;"><label>分钟</label></div> 
+           <div class="label" style="width:5%;text-align:left;"><label>&nbsp;分钟</label></div> 
        </div>
        <div class="form-group">
            <div class="label" style="width:20%;"><label>上传条数(位置):&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
            <div class="field" style="width:15%;">
                <input type="text" class="input" id="locationUpload" name="locationUpload" size="50" data-validate="required:请填写上传数据条数,number:格式错误(数字)" />
            </div>
-           <div class="label" style="width:2%;"><label>条</label></div> 
+           <div class="label" style="width:5%;text-align:left;"><label>&nbsp;条</label></div> 
        </div>
        <br/>
        <div class="form-group">
@@ -111,14 +110,14 @@
            <div class="field" style="width:15%;">
                <input type="text" class="input" id="locateInterval" name="locateInterval" size="50" data-validate="required:请填写紧急定位间隔,number:格式错误(数字)" />
            </div>
-           <div class="label" style="width:2%;"><label>秒</label></div> 
+           <div class="label" style="width:5%;text-align:left;"><label>&nbsp;秒</label></div> 
        </div>     
        <div class="form-group">
            <div class="label" style="width:20%;"><label>紧急定位次数:&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
            <div class="field" style="width:15%;">
                <input type="text" class="input" id="locateTimes" name="locateTimes" size="50" data-validate="required:请填写紧急定位次数,number:格式错误(数字)" />
            </div>
-           <div class="label" style="width:2%;"><label>次</label></div> 
+           <div class="label" style="width:5%;text-align:left;"><label>&nbsp;次</label></div> 
        </div>
        <br/><br/><br/>
        <div class="form-button" style="margin-left:20%;">
